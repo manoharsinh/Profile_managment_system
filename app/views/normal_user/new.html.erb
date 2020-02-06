@@ -6,28 +6,25 @@
  
   <p>
     <%= form.label :password %><br>
-    <%= form.text_area :password %>
+    <%= form.password_field :password %>
   </p>
  <p>
     <%= form.label :email %><br>
-    <%= form.text_area :email %>
+    <%= form.text_field :email %>
   </p>
  <p>
     <%= form.label :accounttype %><br>
-    <%= form.text_area :accounttype %>
+    <%= form.select :accounttype, ['buyer','owner','broker'] %>
   </p>
  <p>
     <%= form.label :phonenumber %><br>
-    <%= form.text_area :phonenumber %>
+    <%= form.text_field :phonenumber %>
   </p>
  <p>
     <%= form.label :status %><br>
-    <%= form.text_area :status %>
+    <%= form.select :status, ['active','inactive'] %>
   </p>
-   <p>
-    <%= form.label :pid %><br>
-    <%= form.text_area :pid %>
-  </p>
+   
  
   <p>
     <%= form.submit('create') %>

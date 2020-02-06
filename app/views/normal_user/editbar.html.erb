@@ -1,4 +1,4 @@
-<%= form_with(model: @user1,url: create2_path ,local: true,method: "post" )do |form| %>
+<%= form_with(model: @user1,url: create2_path ,local: true,method: "post", :id => @user1.id )do |form| %>
 
   <p>
     <%= form.label :name %><br>
@@ -7,7 +7,7 @@
  
   <p>
     <%= form.label :password %><br>
-    <%= form.text_field(:password) %>
+    <%= form.password_field(:password) %>
   </p>
  <p>
     <%= form.label :email %><br>
@@ -15,21 +15,18 @@
   </p>
  <p>
     <%= form.label :accounttype %><br>
-    <%= form.text_field(:accounttype) %>
-  </p>
+    <%= form.select (:accounttype), ['buyer','owner','broker'] %>  </p>
  <p>
     <%= form.label :phonenumber %><br>
     <%= form.text_field(:phonenumber) %>
   </p>
  <p>
     <%= form.label :status %><br>
-    <%= form.text_field(:status) %>
-  </p>
-   <p>
-    <%= form.label :pid %><br>
-    <%= form.text_field(:pid) %>
-  </p>
- 
+   <%= form.select (:status), ['active','inactive'] %>
+
+     </p>
+   
+ <%= form.hidden_field :id, value: @user1.id %>
   <p>
     <%= form.submit('update') %>
   </p>

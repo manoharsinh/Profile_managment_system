@@ -3,19 +3,22 @@ require 'elasticsearch/model'
 class Normaluser < ApplicationRecord
 	has_secure_password
 	validates :email, presence: true, uniqueness: true
+	ACCOUNT_OPTIONS = %w(broker seller buyer)
+	STATUS_OPTIONS = %W(active inactive)
+	# validates :phonenumber,:presence => true,
+ #                 :numericality => true,
+ #                 :length => { :minimum => 10, :maximum => 10 }
+ #  	validates :accounttype, :inclusion => {:in => ACCOUNT_OPTIONS}
+ #  	validates :status, :inclusion => {:in => STATUS_OPTIONS}
 	include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
-	validate :pid_check
-	settings index: {number_of_shards: 1 } do
-		mapping dynamic: false do
-		indexes :name, type: 'keyword', index: true
-		indexes :email, type: 'keyword', index: true
-		indexes :phonenumber, type: 'keyword', index: true
-		end
-	end
+	#validate :pid_check
+	
 	
 	private
+
 	def pid_check
+
 		bool=false
 		if(pid != nil)
 			ppid = Normaluser.find(pid).pid
@@ -40,4 +43,3 @@ class Normaluser < ApplicationRecord
 
 
 end
-Normaluser.import

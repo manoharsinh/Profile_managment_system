@@ -3,7 +3,14 @@ class NormalUserSessionController < ApplicationController
 	end
 	def login
 		#render json: {msg: params}
-  		user = Normaluser.find_by(email: params[:normal_user_session][:email].downcase)
+  		user=nil
+		if params[:normal_user_session][:credentials]=='email'
+  			user = Normaluser.find_by(email: params[:normal_user_session][:credentials_type].downcase)
+  		elsif params[:normal_user_session][:credentials]=='phonenumber'
+  			user = Normaluser.find_by(phonenumber: params[:normal_user_session][:credentials_type])
+  		end
+
+	  	#render json: user
 	  	if user!=nil
 	  		if (user.authenticate(params[:normal_user_session][:password]) && user.status=="active")
 	  			session[:user_id]=user.id
@@ -11,12 +18,12 @@ class NormalUserSessionController < ApplicationController
 	  			#render json: {msg: session}
 	  		else
 	  			#render json: {msg: params}
-	  			render json: {msg:"Not Authorized to access this page"}
+	  			render plain: {msg:"Not Authorized to access this page"}
 	  		end
 
 	  	else
 	  		#render json: {msg: params}
-	  		render json: {msg: "Not Authorized to access this page"}
+	  		render plain: {msg: "Not Authorized to access this page"}
 	  	
 	  	end
   	end

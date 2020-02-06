@@ -6,9 +6,29 @@ class AdminController < ApplicationController
 	end
 	
 	def search
-    	@users = Normaluser.search(params[:normal_user][:term]).records
-    	#render json: {msg: @users, msg2: params}
+    	#@users = Normaluser.search(params[:normal_user][:term]).records
+    	@users=Normaluser.search(
+    		{
+			  query: {
+			    multi_match: {
+			      query:    "#{params[:normal_user][:term]}",
+			      type:       "phrase_prefix",
+			      fields: [ 'email', 'name','phonenumber' ]
+			    }
+			  }
+			}
+		)
+		if(@users.response.length==0)
+			render plain:@users.results
+		end
+		
   	end
   	def dday
+
+  	end
+  	def getreport
+  		data = File.read("/home/manoharsinhrana/Blog11/daily_user_report3.txt")
+  		@words=data.split(":")
+
   	end
 end

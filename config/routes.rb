@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 	get '/getprofile', to: 'api#getprofile'
 	get '/login', to: 'api#login'
 	get '/signup', to: 'api#signup'
+	get '/getreport', to: 'admin#getreport'
 	require 'sidekiq/web'
   	require 'sidekiq/cron/web'
   	mount Sidekiq::Web => '/sidekiq'

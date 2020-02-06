@@ -18,7 +18,8 @@ class NormalUserController < ApplicationController
   		@user=Normaluser.new(normal_user_params)
 		if @user.save
 
-			render json: {msg:@user}
+			redirect_to controller: 'normal_user', action: 'show', id: @user.id
+
 		else
 			render json:{msg:"could not insert data"}
 		end
@@ -27,27 +28,27 @@ class NormalUserController < ApplicationController
 
 	def editbar
 		#render json: {msg: params}
-		$cnt=params[:id]
+		#$user_id=params[:id]
 		@user1=Normaluser.find(params[:id])
 		#render json: {msg: @user1}
 	end
 	def update
 		#render json: {msg: params}
-		@user = Normaluser.find($cnt)
- 		#render json: {msg: params}
-    	if @user.update(update_params)
-    	
-      		redirect_to controller: 'normal_user', action: 'show', id: @user.id
-    	else
-      		render json:{msg: "could not update it"}
-    	end
+		@user = Normaluser.find(params[:normaluser][:id])
+ 	    #render json: {msg: update_params}
+     	if @user.update(update_params)
+    			
+       		redirect_to controller: 'normal_user', action: 'show', id: @user.id
+     	else
+       		render json:{msg: "could not update it"}
+     	end
 	end
 	private
 	def normal_user_params
-    		params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status)
+    		params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status,:pid)
   	end
   	def update_params
-  		    params.permit(:name, :password,:email,:accounttype,:phonenumber,:status)
+  		    params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status)
 
   	end
 end
