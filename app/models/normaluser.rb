@@ -8,16 +8,16 @@ class Normaluser < ApplicationRecord
 	# validates :phonenumber,:presence => true,
  #                 :numericality => true,
  #                 :length => { :minimum => 10, :maximum => 10 }
- #  	validates :accounttype, :inclusion => {:in => ACCOUNT_OPTIONS}
- #  	validates :status, :inclusion => {:in => STATUS_OPTIONS}
+   	#validates :accounttype, :inclusion => {:in => ACCOUNT_OPTIONS}
+   	#validates :status, :inclusion => {:in => STATUS_OPTIONS}
 	include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
-	#validate :pid_check
+	#validate :pid_check_on_create, :on => :create
 	
 	
 	private
 
-	def pid_check
+	def pid_check_on_create
 
 		bool=false
 		if(pid != nil)
@@ -36,10 +36,10 @@ class Normaluser < ApplicationRecord
 		if (cnt==4) || (bool)
 			errors.add(:pid,'pid exceeded validations')
 		else
+			
 			puts "no error"
 		end 
 	end
-	
 
 
 end

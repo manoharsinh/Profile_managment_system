@@ -1,5 +1,6 @@
 class NormalUserController < ApplicationController
-	before_action :authorize, except: :new
+	before_action :authorize, except: [:new, :create]
+	skip_before_action :verify_authenticity_token, only: :create
 	def new
 	end
 	def show
@@ -9,19 +10,20 @@ class NormalUserController < ApplicationController
 	end
 	def create
 		#render json: {msg: normal_user_params}
-		# @user = Normaluser.create('name' => params[:normal_user][:name],
+		# @updateser = Normaluser.create('name' => params[:normal_user][:name],
   #                  'password' => params[:normal_user][:password],
   #                  'email' => params[:normal_user][:email],
 		# 			'accounttype' => params[:normal_user][:accounttype],
   #                  'phonenumber' => params[:normal_user][:phonenumber],
   #                  'status' => params[:normal_user][:status])
+
   		@user=Normaluser.new(normal_user_params)
 		if @user.save
 
 			redirect_to controller: 'normal_user', action: 'show', id: @user.id
 
 		else
-			render json:{msg:"could not insert data"}
+			render plain:{msg:"could not insert data"}
 		end
 
 	end
@@ -45,7 +47,7 @@ class NormalUserController < ApplicationController
 	end
 	private
 	def normal_user_params
-    		params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status,:pid)
+    		params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status)
   	end
   	def update_params
   		    params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status)
