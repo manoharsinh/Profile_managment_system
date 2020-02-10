@@ -13,11 +13,16 @@ class ApplicationController < ActionController::Base
     end
 
     def authorize
+
     	if logged_in?
     		return
-    	else 
-    		redirect_to '/welcome' unless logged_in2?
+    	elsif logged_in2?
+    		return
     	end
+    	#redirect_to '/welcome' 
+    	render json:"you are not logged in" 
+    	
+    	
 	end
 
 	def logged_in2?

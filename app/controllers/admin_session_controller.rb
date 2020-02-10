@@ -16,6 +16,7 @@ class AdminSessionController < ApplicationController
 	  			#render json:{msg: session}
 	  	 		session[:admin_id]=user.id
 	  	 		#render json:{msg:"you have logged in"}
+	  	 		
 	  	 		redirect_to :controller => 'admin', :action => 'dday'
 	  	 	else
 	  	 		flash[:alert] = "Not Authorized to access this page"

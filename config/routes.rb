@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 	get '/loginformadmin', to: 'admin_session#loginform'
 	get '/loginformuser', to: 'normal_user_session#loginform'
 	post '/search', to: 'admin#search'
+	get '/search', to: 'admin#searchbar'
 	get '/dday', to: 'admin#dday'
 	get '/new', to: 'normal_user#new'
 	get '/searchbar', to: 'admin#searchbar'

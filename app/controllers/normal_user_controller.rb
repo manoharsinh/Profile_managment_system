@@ -16,10 +16,11 @@ class NormalUserController < ApplicationController
 		# 			'accounttype' => params[:normal_user][:accounttype],
   #                  'phonenumber' => params[:normal_user][:phonenumber],
   #                  'status' => params[:normal_user][:status])
-
+  		
   		@user=Normaluser.new(normal_user_params)
 		if @user.save
-
+			#render json:{id: @user.id,
+			#	msg: "successfully created user"}
 			redirect_to controller: 'normal_user', action: 'show', id: @user.id
 
 		else
@@ -37,7 +38,8 @@ class NormalUserController < ApplicationController
 	def update
 		#render json: {msg: params}
 		@user = Normaluser.find(params[:normaluser][:id])
- 	    #render json: {msg: update_params}
+		
+ 	    	#render json: {msg: update_params}
      	if @user.update(update_params)
     			
        		redirect_to controller: 'normal_user', action: 'show', id: @user.id
@@ -50,7 +52,7 @@ class NormalUserController < ApplicationController
     		params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status)
   	end
   	def update_params
-  		    params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status)
+  		    params.require(:normaluser).permit(:id,:name, :password,:email,:accounttype,:phonenumber,:status)
 
   	end
 end
