@@ -17,10 +17,14 @@ class NormalUserController < ApplicationController
   #                  'phonenumber' => params[:normal_user][:phonenumber],
   #                  'status' => params[:normal_user][:status])
   		
+  		#render json:{msg: normal_user_params}
+  		#params[:normal_user][:height]
   		@user=Normaluser.new(normal_user_params)
+  		#render json:{msg: @user}
 		if @user.save
 			#render json:{id: @user.id,
 			#	msg: "successfully created user"}
+
 			redirect_to controller: 'normal_user', action: 'show', id: @user.id
 
 		else
@@ -49,7 +53,7 @@ class NormalUserController < ApplicationController
 	end
 	private
 	def normal_user_params
-    		params.require(:normaluser).permit(:name, :password,:email,:accounttype,:phonenumber,:status)
+    		params.require(:normaluser).permit(:height,:name, :password,:email,:accounttype,:phonenumber,:status)
   	end
   	def update_params
   		    params.require(:normaluser).permit(:id,:name, :password,:email,:accounttype,:phonenumber,:status)

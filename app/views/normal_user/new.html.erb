@@ -20,11 +20,12 @@
     <%= form.label :phonenumber %><br>
     <%= form.text_field :phonenumber %>
   </p>
+
  <p>
     <%= form.label :status %><br>
     <%= form.select :status, ['active','inactive'] %>
   </p>
-   
+   <%= form.hidden_field :height, value: 0 %>
  
   <p>
     <%= form.submit('create') %>

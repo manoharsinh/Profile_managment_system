@@ -1,0 +1,9 @@
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.title %></td>
+      <td><%= user.text %></td>
+      <td><%= link_to 'Edit', edit_article_path(user) %></td>
+    </tr>
+  <% end %>

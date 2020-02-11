@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
     	elsif logged_in2?
     		return
     	end
-    	#redirect_to '/welcome' 
-    	render json:"you are not logged in" 
+    	redirect_to '/welcome' 
+    	#render json:"you are not logged in" 
     	
     	
 	end

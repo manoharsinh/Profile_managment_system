@@ -33,6 +33,6 @@ class ApiController < ApplicationController
 	end
 	private
 	def user_params
-		params.permit(:name, :password,:email,:accounttype,:phonenumber,:status)
+		params.permit(:name, :password,:email,:accounttype,:phonenumber,:status,:pid)
 	end
 end
