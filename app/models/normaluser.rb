@@ -15,6 +15,7 @@ class Normaluser < ApplicationRecord
 	#validate :pid_check_on_create, :on => :create
 	#validate :pid_check_on_update, :on => :update
 	validate :check_on_update, :on => :update
+	
 	validate :check_on_update, :on => :create
 	
 	private
